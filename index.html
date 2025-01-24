@@ -1,3 +1,73 @@
-<html>
-teste
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animação de Pêndulo</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        #pendulum {
+            width: 200px;
+            height: 200px;
+            border: 2px solid #000;
+            border-radius: 50%;
+            position: relative;
+            animation: swing 2s infinite ease-in-out;
+        }
+        #pendulum::before {
+            content: '';
+            width: 10px;
+            height: 150px;
+            background-color: #000;
+            position: absolute;
+            top: -150px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        @keyframes swing {
+            0%, 100% {
+                transform: rotate(15deg);
+            }
+            50% {
+                transform: rotate(-15deg);
+            }
+        }
+        #countdown {
+            position: absolute;
+            top: 20px;
+            width: 100%;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="pendulum">
+        <div id="countdown">50</div>
+    </div>
+    <script>
+        const countdownElement = document.getElementById('countdown');
+        let daysLeft = 50;
+
+        function updateCountdown() {
+            daysLeft--;
+            countdownElement.textContent = daysLeft;
+            if (daysLeft > 0) {
+                setTimeout(updateCountdown, 24 * 60 * 60 * 1000); // Atualiza a cada 24 horas
+            } else {
+                countdownElement.textContent = 'Pronto!';
+            }
+        }
+
+        setTimeout(updateCountdown, 24 * 60 * 60 * 1000); // Inicia após 24 horas
+    </script>
+</body>
 </html>
